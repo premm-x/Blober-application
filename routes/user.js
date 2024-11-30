@@ -37,11 +37,13 @@ router.post("/signup",async (req, res) =>{
         demail: `Email is already register : ${email}`,
     });
 
-    await userModel.create({
+    const user = await userModel.create({
         fullname,
         email,
         password
     })
+
+    await user.save();
 
     return res.render("signup", {
         success: "successfully Register..!",
