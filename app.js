@@ -12,7 +12,11 @@ const { validateAuthenticationCookies } = require("./middleware/authmiddle");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGO_URL).then(() =>{
+mongoose.connect(process.env.MONGO_URL,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 30000, // 30 seconds
+}).then(() =>{
     console.log("mongodb was connected");
 })
 
