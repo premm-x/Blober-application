@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>BloBer-Home</title>
+</head>
+<body>
+    
+    <%- include('./partials/nav') %>
+
+    <div class="container mt-4">
+        
+        <% if (!locals.user) { %>
+            <h1>Create account to use facilities..!</h1><br><br>
+        <% } %>
+
+        <h1>All Post</h1>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row g-4">
+            <!-- card -->
+            <% blogs.forEach(blog => { %>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card">
+                        <img src= "<%= blog.coverImageURL %>" class="card-img-top object-fit-cover " height="150px">
+                        <div class="card-body">
+                            
+                            <% if (blog.title.length > 20) { %>
+                            <% const value = blog.title.substring(0, 20) + "..."; %>
+                            <h5 class="card-title"> <%= value %> </h5>
+                            <% } 
+                            else { %>
+                                <h5 class="card-title"> <%= blog.title %> </h5>
+                            <% } %>
+                            
+                          <div class="d-flex justify-content-between">
+                                <a href="/blog/<%= blog._id %> " class="btn btn-primary">View</a>
+                            
+                            <div class="d-flex flex-column">
+                                <small style="font-size: 10px;">Created by</small>
+                                <small style="color: rgb(29, 75, 116); font-weight: 600;"><%= blog.createdBy.fullname %></small>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    
+
+    <%- include('./partials/script') %>
+</body>
+</html>
